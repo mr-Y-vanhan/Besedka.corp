@@ -1,0 +1,11 @@
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Login NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(50) NOT NULL,
+    Role NVARCHAR(20) NOT NULL DEFAULT 'guest'
+);
+
+INSERT INTO Users (Login, Password, Role) VALUES 
+('admin', 'admin', 'admin'),
+('guest', 'guest', 'guest'),
+('manager', 'manager', 'manager');
