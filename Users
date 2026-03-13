@@ -9,3 +9,29 @@ INSERT INTO Users (Login, Password, Role) VALUES
 ('admin', 'admin', 'admin'),
 ('guest', 'guest', 'guest'),
 ('manager', 'manager', 'manager');
+
+-- Таблица пользователей (немного изменил)
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Login NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(50) NOT NULL,
+    Role NVARCHAR(20) NOT NULL DEFAULT 'guest',
+    FullName NVARCHAR(100),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- Добавление тестовых пользователей
+INSERT INTO Users (Login, Password, Role, FullName) VALUES 
+('admin', 'admin', 'admin', 'Администратор'),
+('manager', 'manager', 'manager', 'Менеджер'),
+('client', 'client', 'client', 'Клиент Иванов'),
+('guest', 'guest', 'guest', 'Гость');
+
+-- Добавление поля Category в Products, если его нет
+ALTER TABLE Products ADD Category NVARCHAR(50) NULL;
+ALTER TABLE Products ADD StockQuantity INT DEFAULT 0;
+
+-- Обновление тестовых данных
+UPDATE Products SET Category = 'Кольца', StockQuantity = 10 WHERE Id = 1;
+UPDATE Products SET Category = 'Серьги', StockQuantity = 15 WHERE Id = 2;
+UPDATE Products SET Category = 'Цепи', StockQuantity = 5 WHERE Id = 3;
